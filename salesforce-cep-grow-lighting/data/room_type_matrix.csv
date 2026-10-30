@@ -1,0 +1,8 @@
+Room_Type,Hours,kWh_Factor,CF
+Cannabis Flower Room,4255,1.16,0.68
+Cannabis Veg Room,6498,1.24,0.89
+Flowering Crops (Tomatoes/Peppers),4200,1.21,0.76
+Vegetative/Propagation Growth,6300,1.21,0.95
+Microgreens,6300,1.21,0.95
+Clone Room,6300,1.21,0.95
+Combo Veg & Flower Cannabis Room,5281,1.20,0.78
