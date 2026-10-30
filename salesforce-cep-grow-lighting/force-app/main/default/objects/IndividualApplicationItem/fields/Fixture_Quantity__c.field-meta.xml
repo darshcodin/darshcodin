@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fixture_Quantity__c</fullName>
+    <description>Input: proposed fixture quantity (Qty).</description>
+    <label>Fixture Quantity</label>
+    <type>Number</type>
+    <precision>9</precision>
+    <scale>0</scale>
+</CustomField>

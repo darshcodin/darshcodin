@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>County__c</fullName>
+    <description>County of the service address; maps to climate zone.</description>
+    <label>County</label>
+    <type>Text</type>
+    <length>80</length>
+</CustomField>

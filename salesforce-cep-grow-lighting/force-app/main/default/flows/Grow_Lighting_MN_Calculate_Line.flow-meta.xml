@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <assignments>
+        <name>Set_Calculation_Outputs</name>
+        <label>Set Calculation Outputs</label>
+        <locationX>176</locationX>
+        <locationY>288</locationY>
+        <connector>
+            <targetReference>Set_Explainer</targetReference>
+        </connector>
+        <assignmentItems>
+            <assignToReference>$Record.Electric_Rebate__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fRebate</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Proposed_PPE__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fPropPPE</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Baseline_Watts__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fBaseW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_kW_Savings__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fKW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_kWh_Savings__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fKWH</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Customer_Peak_Coincident_kW__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fPCKW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Incremental_Cost__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>fIncCost</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Technical_TRM_Version__c</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>MN-LIGHT-TRM-2026-v2</stringValue></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Program_Factors_Version__c</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>MN-LIGHT-PF-2026</stringValue></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Incentive_Rules_Version__c</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>MN-LIGHT-IR-2026</stringValue></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Expression_Set_Version__c</assignToReference>
+            <operator>Assign</operator>
+            <value><stringValue>Grow_Lighting_MN_Calculator_V1</stringValue></value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Set_Explainer</name>
+        <label>Set Explainer</label>
+        <locationX>176</locationX>
+        <locationY>408</locationY>
+        <assignmentItems>
+            <assignToReference>$Record.Calculation_Explainer__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>tExplainer</elementReference></value>
+        </assignmentItems>
+    </assignments>
+    <description>Before-save calc: on line submit, compute rebate + initial energy savings for Grow Lighting MN. Mirrors BRE Expression Set Grow_Lighting_MN_Calculator.</description>
+    <environments>Default</environments>
+    <formulas>
+        <name>fRebate</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Fixture_Quantity__c} * {!$Record.Proposed_Fixture_Watts__c} * ROUND(0.70 * (CASE({!$Record.DLC_Tier__c}, "DLC Premium", 1, "DLC Standard", 1, "Non-DLC", 1, 1)), 2)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>fPropPPE</name>
+        <dataType>Number</dataType>
+        <expression>ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2)</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>fBaseW</name>
+        <dataType>Number</dataType>
+        <expression>ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)</expression>
+        <scale>0</scale>
+    </formulas>
+    <formulas>
+        <name>fKW</name>
+        <dataType>Number</dataType>
+        <expression>((ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)) - {!$Record.Proposed_Fixture_Watts__c}) / 1000 * 1.33 * {!$Record.Fixture_Quantity__c}</expression>
+        <scale>4</scale>
+    </formulas>
+    <formulas>
+        <name>fKWH</name>
+        <dataType>Number</dataType>
+        <expression>((ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)) - {!$Record.Proposed_Fixture_Watts__c}) / 1000 * {!$Record.Fixture_Quantity__c} * (CASE({!$Record.Market_Segment_Room_Type__c}, "Cannabis Flower Room", 1.16, "Cannabis Veg Room", 1.24, "Flowering Crops (Tomatoes/Peppers)", 1.21, "Vegetative/Propagation Growth", 1.21, "Microgreens", 1.21, "Clone Room", 1.21, "Combo Veg &amp; Flower Cannabis Room", 1.2, 0)) * (CASE({!$Record.Market_Segment_Room_Type__c}, "Cannabis Flower Room", 4255, "Cannabis Veg Room", 6498, "Flowering Crops (Tomatoes/Peppers)", 4200, "Vegetative/Propagation Growth", 6300, "Microgreens", 6300, "Clone Room", 6300, "Combo Veg &amp; Flower Cannabis Room", 5281, 0))</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>fPCKW</name>
+        <dataType>Number</dataType>
+        <expression>ROUND((((ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)) - {!$Record.Proposed_Fixture_Watts__c}) / 1000 * 1.33 * {!$Record.Fixture_Quantity__c}), 3) * (CASE({!$Record.Market_Segment_Room_Type__c}, "Cannabis Flower Room", 0.68, "Cannabis Veg Room", 0.89, "Flowering Crops (Tomatoes/Peppers)", 0.76, "Vegetative/Propagation Growth", 0.95, "Microgreens", 0.95, "Clone Room", 0.95, "Combo Veg &amp; Flower Cannabis Room", 0.78, 0))</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>fIncCost</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Fixture_Quantity__c} * {!$Record.Proposed_Fixture_Watts__c} * 1.13</expression>
+        <scale>2</scale>
+    </formulas>
+    <interviewLabel>Grow Lighting MN - Calculate Line {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Grow Lighting MN - Calculate Line</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Set_Calculation_Outputs</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Fixture_Quantity__c</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <filters>
+            <field>Market_Segment_Room_Type__c</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <filters>
+            <field>Proposed_PPF__c</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <filters>
+            <field>Proposed_Fixture_Watts__c</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <filters>
+            <field>DLC_Tier__c</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>false</booleanValue></value>
+        </filters>
+        <object>IndividualApplicationItem</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>tExplainer</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Grow Lighting MN v2 calculation
+Inputs: Qty={!$Record.Fixture_Quantity__c}, Room={!$Record.Market_Segment_Room_Type__c}, PPF={!$Record.Proposed_PPF__c}, Watts={!$Record.Proposed_Fixture_Watts__c}, DLC={!$Record.DLC_Tier__c}
+Proposed PPE = ROUND(PPF/Watts,2) = {!$Record.Proposed_PPE__c}
+Baseline Watts = ROUND((Watts*0.972*PPE)/(0.783*1.08),0) = {!$Record.Baseline_Watts__c}
+Electric Rebate = Qty*Watts*ROUND(0.70*DLC_Adj,2) = {!$Record.Electric_Rebate__c}
+kW Demand Savings = (BaseW-Watts)/1000*1.33*Qty = {!$Record.Customer_kW_Savings__c}
+kWh Energy Savings = (BaseW-Watts)/1000*Qty*kWhFactor*Hours = {!$Record.Customer_kWh_Savings__c}
+Peak Coincident kW = ROUND(kW,3)*CF = {!$Record.Customer_Peak_Coincident_kW__c}
+Incremental Cost = Qty*Watts*1.13 = {!$Record.Incremental_Cost__c}
+Versions: {!$Record.Technical_TRM_Version__c} / {!$Record.Program_Factors_Version__c} / {!$Record.Incentive_Rules_Version__c} / {!$Record.Expression_Set_Version__c}</text>
+    </textTemplates>
+</Flow>

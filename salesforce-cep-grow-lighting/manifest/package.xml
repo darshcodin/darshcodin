@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>IndividualApplicationItem.Baseline_Watts__c</members>
+        <members>IndividualApplicationItem.Calculation_Explainer__c</members>
+        <members>IndividualApplicationItem.Customer_Peak_Coincident_kW__c</members>
+        <members>IndividualApplicationItem.Customer_kW_Savings__c</members>
+        <members>IndividualApplicationItem.Customer_kWh_Savings__c</members>
+        <members>IndividualApplicationItem.DLC_Tier__c</members>
+        <members>IndividualApplicationItem.Electric_Rebate__c</members>
+        <members>IndividualApplicationItem.Expression_Set_Version__c</members>
+        <members>IndividualApplicationItem.Fixture_Quantity__c</members>
+        <members>IndividualApplicationItem.Incentive_Rules_Version__c</members>
+        <members>IndividualApplicationItem.Incremental_Cost__c</members>
+        <members>IndividualApplicationItem.Invoice_Date__c</members>
+        <members>IndividualApplicationItem.Market_Segment_Room_Type__c</members>
+        <members>IndividualApplicationItem.Program_Factors_Version__c</members>
+        <members>IndividualApplicationItem.Proposed_Fixture_Watts__c</members>
+        <members>IndividualApplicationItem.Proposed_PPE__c</members>
+        <members>IndividualApplicationItem.Proposed_PPF__c</members>
+        <members>IndividualApplicationItem.Technical_TRM_Version__c</members>
+        <members>Location.County__c</members>
+        <members>Location.Customer_Fuel_Type__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
         <members>Grow_Lighting_MN_Calculator</members>
         <name>ExpressionSetDefinition</name>
     </types>
     <types>
         <members>Grow_Lighting_MN_Calculator_V1</members>
         <name>ExpressionSetDefinitionVersion</name>
+    </types>
+    <types>
+        <members>Grow_Lighting_MN_Calculate_Line</members>
+        <members>Grow_Lighting_MN_Create_Benefit_Assignment</members>
+        <members>Grow_Lighting_MN_Rebate_Application</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>CEP_Grow_Lighting_Calculator</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
     </types>
     <version>62.0</version>
 </Package>

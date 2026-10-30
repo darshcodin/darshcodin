@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <choices>
+        <name>chRoom_0</name>
+        <choiceText>Cannabis Flower Room</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Cannabis Flower Room</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_1</name>
+        <choiceText>Cannabis Veg Room</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Cannabis Veg Room</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_2</name>
+        <choiceText>Flowering Crops (Tomatoes/Peppers)</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Flowering Crops (Tomatoes/Peppers)</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_3</name>
+        <choiceText>Vegetative/Propagation Growth</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Vegetative/Propagation Growth</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_4</name>
+        <choiceText>Microgreens</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Microgreens</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_5</name>
+        <choiceText>Clone Room</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Clone Room</stringValue></value>
+    </choices>
+    <choices>
+        <name>chRoom_6</name>
+        <choiceText>Combo Veg &amp; Flower Cannabis Room</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Combo Veg &amp; Flower Cannabis Room</stringValue></value>
+    </choices>
+    <choices>
+        <name>chDlc_0</name>
+        <choiceText>DLC Premium</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>DLC Premium</stringValue></value>
+    </choices>
+    <choices>
+        <name>chDlc_1</name>
+        <choiceText>DLC Standard</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>DLC Standard</stringValue></value>
+    </choices>
+    <choices>
+        <name>chDlc_2</name>
+        <choiceText>Non-DLC</choiceText>
+        <dataType>String</dataType>
+        <value><stringValue>Non-DLC</stringValue></value>
+    </choices>
+    <description>Guided Grow Lighting MN rebate application: capture inputs, create the application and line (which calculate and award the rebate), then show results.</description>
+    <environments>Default</environments>
+    <interviewLabel>Grow Lighting MN - Rebate Application {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Grow Lighting MN - Rebate Application</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value><stringValue>LightningFlowBuilder</stringValue></value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Application</name>
+        <label>Create Application</label>
+        <locationX>176</locationX>
+        <locationY>518</locationY>
+        <connector><targetReference>Create_Item</targetReference></connector>
+        <inputAssignments>
+            <field>AccountId</field>
+            <value><elementReference>Get_Account.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Category</field>
+            <value><stringValue>Program</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>In Progress</stringValue></value>
+        </inputAssignments>
+        <object>IndividualApplication</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Item</name>
+        <label>Create Application Line</label>
+        <locationX>176</locationX>
+        <locationY>638</locationY>
+        <connector><targetReference>Get_Item</targetReference></connector>
+        <inputAssignments>
+            <field>DLC_Tier__c</field>
+            <value><elementReference>in_DLC_Tier</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Fixture_Quantity__c</field>
+            <value><elementReference>in_Quantity</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>IndividualApplicationId</field>
+            <value><elementReference>Create_Application</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Invoice_Date__c</field>
+            <value><elementReference>in_Invoice_Date</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Market_Segment_Room_Type__c</field>
+            <value><elementReference>in_Room_Type</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value><stringValue>LED Grow Fixture MN v2</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Proposed_Fixture_Watts__c</field>
+            <value><elementReference>in_Fixture_Watts</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Proposed_PPF__c</field>
+            <value><elementReference>in_PPF</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>RelatedItemId</field>
+            <value><elementReference>Get_Program_Product.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Pending</stringValue></value>
+        </inputAssignments>
+        <object>IndividualApplicationItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Account</name>
+        <label>Get Demo Account</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Get_Program_Product</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>Green Valley Growers</stringValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Item</name>
+        <label>Get Calculated Line</label>
+        <locationX>176</locationX>
+        <locationY>758</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Screen_Results</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Create_Item</elementReference></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>IndividualApplicationItem</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Product</name>
+        <label>Get Product</label>
+        <locationX>176</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Get_Account</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>MN - Lighting Efficiency Rebate</stringValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Program_Product</name>
+        <label>Get Program Product</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Screen_Inputs</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>ProductId</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Get_Product.Id</elementReference></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ProgramProduct</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <screens>
+        <name>Screen_Inputs</name>
+        <label>Measure Inputs</label>
+        <locationX>176</locationX>
+        <locationY>398</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector><targetReference>Create_Application</targetReference></connector>
+        <fields>
+            <name>in_Quantity</name>
+            <dataType>Number</dataType>
+            <fieldText>Fixture Quantity</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>0</scale>
+        </fields>
+        <fields>
+            <name>in_Room_Type</name>
+            <choiceReferences>chRoom_0</choiceReferences>
+            <choiceReferences>chRoom_1</choiceReferences>
+            <choiceReferences>chRoom_2</choiceReferences>
+            <choiceReferences>chRoom_3</choiceReferences>
+            <choiceReferences>chRoom_4</choiceReferences>
+            <choiceReferences>chRoom_5</choiceReferences>
+            <choiceReferences>chRoom_6</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Market Segment / Room Type</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>in_PPF</name>
+            <dataType>Number</dataType>
+            <fieldText>Proposed PPF (umol/s)</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+        </fields>
+        <fields>
+            <name>in_Fixture_Watts</name>
+            <dataType>Number</dataType>
+            <fieldText>Proposed Fixture Watts</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+            <scale>2</scale>
+        </fields>
+        <fields>
+            <name>in_DLC_Tier</name>
+            <choiceReferences>chDlc_0</choiceReferences>
+            <choiceReferences>chDlc_1</choiceReferences>
+            <choiceReferences>chDlc_2</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>DLC Tier</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>in_Invoice_Date</name>
+            <dataType>Date</dataType>
+            <fieldText>Invoice Date</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Screen_Results</name>
+        <label>Rebate and Savings</label>
+        <locationX>176</locationX>
+        <locationY>878</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>dispResults</name>
+            <fieldText>&lt;b&gt;Rebate and Savings - {!Get_Item.Name}&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;Electric Rebate (incentive): &lt;b&gt;${!Get_Item.Electric_Rebate__c}&lt;/b&gt;&lt;br/&gt;Proposed PPE: {!Get_Item.Proposed_PPE__c} umol/J&lt;br/&gt;Baseline Watts (derived): {!Get_Item.Baseline_Watts__c} W&lt;br/&gt;Customer kW Demand Savings: {!Get_Item.Customer_kW_Savings__c} kW&lt;br/&gt;Customer kWh Energy Savings: {!Get_Item.Customer_kWh_Savings__c} kWh/yr&lt;br/&gt;Peak Coincident kW: {!Get_Item.Customer_Peak_Coincident_kW__c} kW&lt;br/&gt;Incremental Cost: ${!Get_Item.Incremental_Cost__c}&lt;br/&gt;&lt;br/&gt;Versions: {!Get_Item.Technical_TRM_Version__c} / {!Get_Item.Program_Factors_Version__c} / {!Get_Item.Incentive_Rules_Version__c}</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector><targetReference>Get_Product</targetReference></connector>
+    </start>
+    <status>Active</status>
+</Flow>

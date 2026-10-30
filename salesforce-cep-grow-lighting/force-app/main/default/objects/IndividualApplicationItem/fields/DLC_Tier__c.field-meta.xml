@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DLC_Tier__c</fullName>
+    <description>Input: DesignLights Consortium tier.</description>
+    <label>DLC Tier</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+                <value>
+                    <fullName>DLC Premium</fullName>
+                    <default>false</default>
+                    <label>DLC Premium</label>
+                </value>
+                <value>
+                    <fullName>DLC Standard</fullName>
+                    <default>false</default>
+                    <label>DLC Standard</label>
+                </value>
+                <value>
+                    <fullName>Non-DLC</fullName>
+                    <default>false</default>
+                    <label>Non-DLC</label>
+                </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Market_Segment_Room_Type__c</fullName>
+    <description>Input: room type; drives Hours, kWh factor and coincidence factor.</description>
+    <label>Market Segment / Room Type</label>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+                <value>
+                    <fullName>Cannabis Flower Room</fullName>
+                    <default>false</default>
+                    <label>Cannabis Flower Room</label>
+                </value>
+                <value>
+                    <fullName>Cannabis Veg Room</fullName>
+                    <default>false</default>
+                    <label>Cannabis Veg Room</label>
+                </value>
+                <value>
+                    <fullName>Flowering Crops (Tomatoes/Peppers)</fullName>
+                    <default>false</default>
+                    <label>Flowering Crops (Tomatoes/Peppers)</label>
+                </value>
+                <value>
+                    <fullName>Vegetative/Propagation Growth</fullName>
+                    <default>false</default>
+                    <label>Vegetative/Propagation Growth</label>
+                </value>
+                <value>
+                    <fullName>Microgreens</fullName>
+                    <default>false</default>
+                    <label>Microgreens</label>
+                </value>
+                <value>
+                    <fullName>Clone Room</fullName>
+                    <default>false</default>
+                    <label>Clone Room</label>
+                </value>
+                <value>
+                    <fullName>Combo Veg & Flower Cannabis Room</fullName>
+                    <default>false</default>
+                    <label>Combo Veg & Flower Cannabis Room</label>
+                </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
