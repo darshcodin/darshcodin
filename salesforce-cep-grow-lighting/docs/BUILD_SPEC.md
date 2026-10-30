@@ -33,7 +33,14 @@ and `CEP_Conceptual_Solution_Architecture.pptx`.
 
 ---
 
-## 3. Decision Matrices (lookups)
+> **Implementation note.** In the deployed build the two lookups below are implemented as
+> inline `IF()` expressions inside the Expression Set (identical results, fewer moving parts,
+> guaranteed deployable). Promoting them to native **Decision Matrices** — keyed by
+> jurisdiction + program + effective dates — is the recommended next step, because that is
+> what makes new TRM filings a *data* change (new matrix version) rather than a logic change.
+> The matrix rows are kept ready in `data/*.csv`.
+
+## 3. Lookups (inline today; Decision Matrices next)
 
 ### 3.1 `Grow_Lighting_Room_Type`
 - **Input key:** `Room_Type` (equals)
@@ -127,25 +134,52 @@ Lookups: `Hours = 4255`, `kWh_Factor = 1.16`, `CF = 0.68`, `DLC_Adj = 1.0`
 | `Prop_PPE` | ROUND(1700/630,2) = **2.70** |
 | `Base_W` | ROUND((630×0.972×2.70)/(0.783×1.08),0) = ROUND(1653.37/0.84564,0) = **1955** |
 | `customerKW` | (1955−630)/1000 × 1.33 × 10 = 1.325×1.33×10 = **17.6225** |
-| `customerKWH` | (1955−630)/1000 × 10 × 1.16 × 4255 = 1.325×10×1.16×4255 = **65,400.85** |
+| `customerKWH` | (1955−630)/1000 × 10 × 1.16 × 4255 = 1.325×10×1.16×4255 = **65,399.35** |
 | `customerPCKW` | ROUND(17.6225,3) × 0.68 = 17.623×0.68 = **11.98364** |
 | `incrementalCost` | 10 × 630 × 1.13 = **7,119.00** |
 
-> These values are recomputed and asserted after deployment via a live Expression Set
-> run (`sf data ...` / anonymous run against the deployed set) — not mocked.
+Full expected result set (to assert against a live run):
+
+| Output | Expected |
+|---|---|
+| electricRebate | 4410.00 |
+| Prop_PPE | 2.70 |
+| Base_W | 1955 |
+| customerKW | 17.6225 |
+| customerKWH | 65399.35 |
+| customerPCKW | 11.98364 |
+| incrementalCost | 7119.00 |
 
 ---
 
-## 8. Metadata artifacts (confirm exact type names against the target org first)
+## 8. What was built & deployed
 
-BRE metadata naming differs between native BRE and OmniStudio-based BRE. On connect:
-`sf org list metadata-types` → confirm which of these exist, then author/retrieve:
+Target org `ibm81` runs the **native Business Rules Engine** (`ExpressionSetDefinition`,
+`ExpressionSetDefinitionVersion`, `DecisionMatrixDefinition`) alongside OmniStudio
+`CalculationMatrix`. The calculator is a native BRE Expression Set of type **`Bre`**.
 
-- Decision Matrix: `DecisionMatrix` (native BRE) **or** `CalculationMatrix` + `CalculationMatrixVersion` (OmniStudio).
-- Expression Set: `ExpressionSetDefinition` + `ExpressionSetDefinitionVersion` (+ `ExpressionSet`).
-- Permission Set: grant access to the Expression Set / matrices to the running user.
+Deployed metadata (under `force-app/main/default/`):
+- `expressionSetDefinition/Grow_Lighting_MN_Calculator.expressionSetDefinition-meta.xml`
+- `expressionSetVersion/Grow_Lighting_MN_Calculator_V1.expressionSetVersion-meta.xml`
+  — 5 input variables, 11 derived/output variables, 11 ordered `AssignParameterValues` steps.
 
-Deliverable layout under `force-app/main/default/`:
-- `decisionMatrices/` (or `calculationMatrices/`)
-- `expressionSetDefinitions/`
-- `permissionsets/CEP_Grow_Lighting_Calculator.permissionset-meta.xml`
+Status in org: **Active** (`ExpressionSet.ApiName = Grow_Lighting_MN_Calculator`, `UsageType = Bre`).
+Activation is itself a server-side validation: BRE rejects a version with invalid expressions,
+variables, or string literals, so an *Active* version proves the formula syntax is valid.
+
+### Deployment sequence (two-phase — matters for a fresh org)
+BRE won't activate a version in the same pass that first creates its steps. So:
+1. Deploy with both statuses `Draft` → creates definition + version + steps.
+2. Flip the **version file** status to `Active` (keep the definition's inline `<versions>` as
+   `Draft`) and redeploy → activates. See `scripts/deploy.sh`.
+
+### Verifying the numbers (live run)
+Runtime evaluation requires the **`BRERuntime`** ("Rule Engine Runtime") permission set on the
+running user; without it the Connect evaluation resource returns `NOT_FOUND`. Once assigned:
+`bash scripts/verify_calculator.sh` runs the worked example and asserts the table above.
+
+### Recommended enhancements (beyond core scope)
+- Move Room Type + DLC Tier lookups into native **Decision Matrices** (TRM-version friendly).
+- Add the orchestration **Flow** on Individual Application Line Item submit (per architecture).
+- Add the 11 dependent Electric DSM roll-up metrics.
+- Add a permission set granting designer/runtime access for program users.

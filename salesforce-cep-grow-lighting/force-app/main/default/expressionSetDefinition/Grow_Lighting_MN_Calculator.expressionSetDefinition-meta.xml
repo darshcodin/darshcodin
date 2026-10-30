@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExpressionSetDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>CEP Clean Energy Program - Grow Lighting MN (LED Grow Fixture MN v2). Core savings and rebate calculator built on Business Rules Engine. No Apex.</description>
+    <interfaceSourceType>Bre</interfaceSourceType>
+    <label>Grow Lighting MN Calculator</label>
+    <processType>Bre</processType>
+    <template>false</template>
+    <versions>
+        <fullName>Grow_Lighting_MN_Calculator_V1</fullName>
+        <expressionSetDefinition>Grow_Lighting_MN_Calculator</expressionSetDefinition>
+        <interfaceSourceType>Bre</interfaceSourceType>
+        <label>Grow Lighting MN Calculator V1</label>
+        <processType>Bre</processType>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
+        <startDate>2026-01-01T00:00:00.000Z</startDate>
+        <status>Draft</status>
+        <versionNumber>1</versionNumber>
+    </versions>
+</ExpressionSetDefinition>
