@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Net_kW_Customer_PCkW__c</fullName>
+    <description>Dependent: includes market spillover effects.</description>
+    <label>Total Net kW Cust (PCkW)</label>
+    <type>Number</type>
+    <precision>14</precision>
+    <scale>5</scale>
+</CustomField>

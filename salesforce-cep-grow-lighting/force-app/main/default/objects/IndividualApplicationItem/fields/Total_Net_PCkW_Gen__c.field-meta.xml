@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Total_Net_PCkW_Gen__c</fullName>
+    <description>Dependent: net demand at generator source.</description>
+    <label>Total Net PCkW at Gen</label>
+    <type>Number</type>
+    <precision>14</precision>
+    <scale>5</scale>
+</CustomField>

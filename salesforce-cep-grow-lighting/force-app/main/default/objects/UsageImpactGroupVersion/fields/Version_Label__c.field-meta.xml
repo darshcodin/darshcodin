@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Version_Label__c</fullName>
+    <description>TRM version label stamped on calculated lines.</description>
+    <label>Version Label</label>
+    <type>Text</type>
+    <length>80</length>
+</CustomField>

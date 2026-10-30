@@ -5,10 +5,8 @@
         <name>Set_Calculation_Outputs</name>
         <label>Set Calculation Outputs</label>
         <locationX>176</locationX>
-        <locationY>288</locationY>
-        <connector>
-            <targetReference>Set_Explainer</targetReference>
-        </connector>
+        <locationY>528</locationY>
+        <connector><targetReference>Set_Dependent_Metrics</targetReference></connector>
         <assignmentItems>
             <assignToReference>$Record.Electric_Rebate__c</assignToReference>
             <operator>Assign</operator>
@@ -45,9 +43,34 @@
             <value><elementReference>fIncCost</elementReference></value>
         </assignmentItems>
         <assignmentItems>
+            <assignToReference>$Record.TD_Loss_Factor_Used__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>Get_TRM_Version.TD_Loss_Factor__c</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.NTG_Only_Used__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>Get_TRM_Version.NTG_Only__c</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.NTG_Total_Used__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>Get_TRM_Version.NTG_Total__c</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Measure_Life_Used__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>Get_TRM_Version.Measure_Life_Years__c</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>$Record.Technical_TRM_Version__c</assignToReference>
             <operator>Assign</operator>
-            <value><stringValue>MN-LIGHT-TRM-2026-v2</stringValue></value>
+            <value><elementReference>Get_TRM_Version.Version_Label__c</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Participants_Used__c</assignToReference>
+            <operator>Assign</operator>
+            <value><numberValue>1</numberValue></value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>$Record.Program_Factors_Version__c</assignToReference>
@@ -66,17 +89,79 @@
         </assignmentItems>
     </assignments>
     <assignments>
+        <name>Set_Dependent_Metrics</name>
+        <label>Set Dependent DSM Metrics</label>
+        <locationX>176</locationX>
+        <locationY>648</locationY>
+        <connector><targetReference>Set_Explainer</targetReference></connector>
+        <assignmentItems>
+            <assignToReference>$Record.SM_kW_Gen_PCkW__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dSMkWGen</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Gross_Annual_PCkW_Customer__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dGrossPCkW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Only_Net_kW_Customer_PCkW__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dTotalOnlyNetkW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Net_kW_Customer_PCkW__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dTotalNetkW</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Total_Net_PCkW_Gen__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dTotalNetPCkWGen</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Gross_Annual_kWh_Customer__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dGrosskWh</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Program_Net_Annual_Customer_kWh__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dProgNetCustkWh</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Gen_kWh__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dGenkWh</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Program_Net_Annual_Generator_kWh__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dProgNetGenkWh</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Lifetime_Gen_kWh__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dLifetimeGenkWh</elementReference></value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>$Record.Lifetime_Net_Gen_kWh__c</assignToReference>
+            <operator>Assign</operator>
+            <value><elementReference>dLifetimeNetGenkWh</elementReference></value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
         <name>Set_Explainer</name>
         <label>Set Explainer</label>
         <locationX>176</locationX>
-        <locationY>408</locationY>
+        <locationY>768</locationY>
         <assignmentItems>
             <assignToReference>$Record.Calculation_Explainer__c</assignToReference>
             <operator>Assign</operator>
             <value><elementReference>tExplainer</elementReference></value>
         </assignmentItems>
     </assignments>
-    <description>Before-save calc: on line submit, compute rebate + initial energy savings for Grow Lighting MN. Mirrors BRE Expression Set Grow_Lighting_MN_Calculator.</description>
+    <description>Before-save: resolve TRM version by invoice date, compute rebate + initial energy savings (mirrors BRE Expression Set) + 11 dependent DSM metrics + lineage.</description>
     <environments>Default</environments>
     <formulas>
         <name>fRebate</name>
@@ -111,13 +196,79 @@
     <formulas>
         <name>fPCKW</name>
         <dataType>Number</dataType>
-        <expression>ROUND((((ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)) - {!$Record.Proposed_Fixture_Watts__c}) / 1000 * 1.33 * {!$Record.Fixture_Quantity__c}), 3) * (CASE({!$Record.Market_Segment_Room_Type__c}, "Cannabis Flower Room", 0.68, "Cannabis Veg Room", 0.89, "Flowering Crops (Tomatoes/Peppers)", 0.76, "Vegetative/Propagation Growth", 0.95, "Microgreens", 0.95, "Clone Room", 0.95, "Combo Veg &amp; Flower Cannabis Room", 0.78, 0))</expression>
+        <expression>ROUND(((ROUND(({!$Record.Proposed_Fixture_Watts__c} * 0.972 * (ROUND({!$Record.Proposed_PPF__c} / {!$Record.Proposed_Fixture_Watts__c}, 2))) / (0.783 * 1.08), 0)) - {!$Record.Proposed_Fixture_Watts__c}) / 1000 * 1.33 * {!$Record.Fixture_Quantity__c}, 3) * (CASE({!$Record.Market_Segment_Room_Type__c}, "Cannabis Flower Room", 0.68, "Cannabis Veg Room", 0.89, "Flowering Crops (Tomatoes/Peppers)", 0.76, "Vegetative/Propagation Growth", 0.95, "Microgreens", 0.95, "Clone Room", 0.95, "Combo Veg &amp; Flower Cannabis Room", 0.78, 0))</expression>
         <scale>5</scale>
     </formulas>
     <formulas>
         <name>fIncCost</name>
         <dataType>Number</dataType>
         <expression>{!$Record.Fixture_Quantity__c} * {!$Record.Proposed_Fixture_Watts__c} * 1.13</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dSMkWGen</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Customer_Peak_Coincident_kW__c} * {!$Record.TD_Loss_Factor_Used__c}</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>dGrossPCkW</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Customer_Peak_Coincident_kW__c} * {!$Record.Participants_Used__c}</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>dTotalOnlyNetkW</name>
+        <dataType>Number</dataType>
+        <expression>({!$Record.Customer_Peak_Coincident_kW__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Only_Used__c}</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>dTotalNetkW</name>
+        <dataType>Number</dataType>
+        <expression>({!$Record.Customer_Peak_Coincident_kW__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Total_Used__c}</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>dTotalNetPCkWGen</name>
+        <dataType>Number</dataType>
+        <expression>(({!$Record.Customer_Peak_Coincident_kW__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Total_Used__c}) * {!$Record.TD_Loss_Factor_Used__c}</expression>
+        <scale>5</scale>
+    </formulas>
+    <formulas>
+        <name>dGrosskWh</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Customer_kWh_Savings__c} * {!$Record.Participants_Used__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dProgNetCustkWh</name>
+        <dataType>Number</dataType>
+        <expression>({!$Record.Customer_kWh_Savings__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Total_Used__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dGenkWh</name>
+        <dataType>Number</dataType>
+        <expression>{!$Record.Customer_kWh_Savings__c} * {!$Record.TD_Loss_Factor_Used__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dProgNetGenkWh</name>
+        <dataType>Number</dataType>
+        <expression>(({!$Record.Customer_kWh_Savings__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Total_Used__c}) * {!$Record.TD_Loss_Factor_Used__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dLifetimeGenkWh</name>
+        <dataType>Number</dataType>
+        <expression>({!$Record.Customer_kWh_Savings__c} * {!$Record.TD_Loss_Factor_Used__c}) * {!$Record.Measure_Life_Used__c}</expression>
+        <scale>2</scale>
+    </formulas>
+    <formulas>
+        <name>dLifetimeNetGenkWh</name>
+        <dataType>Number</dataType>
+        <expression>((({!$Record.Customer_kWh_Savings__c} * {!$Record.Participants_Used__c}) * {!$Record.NTG_Total_Used__c}) * {!$Record.TD_Loss_Factor_Used__c}) * {!$Record.Measure_Life_Used__c}</expression>
         <scale>2</scale>
     </formulas>
     <interviewLabel>Grow Lighting MN - Calculate Line {!$Flow.CurrentDateTime}</interviewLabel>
@@ -127,12 +278,82 @@
         <value><stringValue>LightningFlowBuilder</stringValue></value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Program_Product</name>
+        <label>Get Program Product</label>
+        <locationX>176</locationX>
+        <locationY>168</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Get_TRM_Group</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>$Record.RelatedItemId</elementReference></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>ProgramProduct</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>ProductId</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_TRM_Group</name>
+        <label>Get TRM Group</label>
+        <locationX>176</locationX>
+        <locationY>288</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Get_TRM_Version</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product__c</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Get_Program_Product.ProductId</elementReference></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UsageImpactGroup</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_TRM_Version</name>
+        <label>Get TRM Version (by invoice date)</label>
+        <locationX>176</locationX>
+        <locationY>408</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Set_Calculation_Outputs</targetReference></connector>
+        <filterLogic>1 AND (2 OR 3)</filterLogic>
+        <filters>
+            <field>StartDate</field>
+            <operator>LessThanOrEqualTo</operator>
+            <value><elementReference>$Record.Invoice_Date__c</elementReference></value>
+        </filters>
+        <filters>
+            <field>EndDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value><elementReference>$Record.Invoice_Date__c</elementReference></value>
+        </filters>
+        <filters>
+            <field>EndDate</field>
+            <operator>IsNull</operator>
+            <value><booleanValue>true</booleanValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>UsageImpactGroupVersion</object>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Version_Label__c</queriedFields>
+        <queriedFields>TD_Loss_Factor__c</queriedFields>
+        <queriedFields>NTG_Only__c</queriedFields>
+        <queriedFields>NTG_Total__c</queriedFields>
+        <queriedFields>Measure_Life_Years__c</queriedFields>
+        <sortField>Version</sortField>
+        <sortOrder>Desc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <start>
         <locationX>50</locationX>
         <locationY>0</locationY>
-        <connector>
-            <targetReference>Set_Calculation_Outputs</targetReference>
-        </connector>
+        <connector><targetReference>Get_Program_Product</targetReference></connector>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Fixture_Quantity__c</field>
@@ -168,14 +389,13 @@
         <name>tExplainer</name>
         <isViewedAsPlainText>true</isViewedAsPlainText>
         <text>Grow Lighting MN v2 calculation
-Inputs: Qty={!$Record.Fixture_Quantity__c}, Room={!$Record.Market_Segment_Room_Type__c}, PPF={!$Record.Proposed_PPF__c}, Watts={!$Record.Proposed_Fixture_Watts__c}, DLC={!$Record.DLC_Tier__c}
+Inputs: Qty={!$Record.Fixture_Quantity__c}, Room={!$Record.Market_Segment_Room_Type__c}, PPF={!$Record.Proposed_PPF__c}, Watts={!$Record.Proposed_Fixture_Watts__c}, DLC={!$Record.DLC_Tier__c}, Invoice={!$Record.Invoice_Date__c}
+TRM version (by invoice date): {!$Record.Technical_TRM_Version__c} [T&amp;D={!$Record.TD_Loss_Factor_Used__c}, NTG_Only={!$Record.NTG_Only_Used__c}, NTG_Total={!$Record.NTG_Total_Used__c}, Life={!$Record.Measure_Life_Used__c}]
 Proposed PPE = ROUND(PPF/Watts,2) = {!$Record.Proposed_PPE__c}
 Baseline Watts = ROUND((Watts*0.972*PPE)/(0.783*1.08),0) = {!$Record.Baseline_Watts__c}
 Electric Rebate = Qty*Watts*ROUND(0.70*DLC_Adj,2) = {!$Record.Electric_Rebate__c}
-kW Demand Savings = (BaseW-Watts)/1000*1.33*Qty = {!$Record.Customer_kW_Savings__c}
-kWh Energy Savings = (BaseW-Watts)/1000*Qty*kWhFactor*Hours = {!$Record.Customer_kWh_Savings__c}
-Peak Coincident kW = ROUND(kW,3)*CF = {!$Record.Customer_Peak_Coincident_kW__c}
-Incremental Cost = Qty*Watts*1.13 = {!$Record.Incremental_Cost__c}
-Versions: {!$Record.Technical_TRM_Version__c} / {!$Record.Program_Factors_Version__c} / {!$Record.Incentive_Rules_Version__c} / {!$Record.Expression_Set_Version__c}</text>
+kW Demand Savings = {!$Record.Customer_kW_Savings__c}; kWh = {!$Record.Customer_kWh_Savings__c}; Peak Coincident kW = {!$Record.Customer_Peak_Coincident_kW__c}
+Incremental Cost = {!$Record.Incremental_Cost__c}
+Dependent DSM: SM kW Gen={!$Record.SM_kW_Gen_PCkW__c}, Net kW Cust={!$Record.Total_Net_kW_Customer_PCkW__c}, Gen kWh={!$Record.Gen_kWh__c}, Lifetime Net Gen kWh={!$Record.Lifetime_Net_Gen_kWh__c}</text>
     </textTemplates>
 </Flow>

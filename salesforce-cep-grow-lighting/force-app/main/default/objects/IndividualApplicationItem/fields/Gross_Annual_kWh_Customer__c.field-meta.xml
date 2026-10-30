@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gross_Annual_kWh_Customer__c</fullName>
+    <description>Dependent: gross annual energy savings at customer.</description>
+    <label>Gross Annual kWh at Customer</label>
+    <type>Number</type>
+    <precision>16</precision>
+    <scale>2</scale>
+</CustomField>

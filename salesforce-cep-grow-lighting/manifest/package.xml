@@ -10,17 +10,39 @@
         <members>IndividualApplicationItem.Electric_Rebate__c</members>
         <members>IndividualApplicationItem.Expression_Set_Version__c</members>
         <members>IndividualApplicationItem.Fixture_Quantity__c</members>
+        <members>IndividualApplicationItem.Gen_kWh__c</members>
+        <members>IndividualApplicationItem.Gross_Annual_PCkW_Customer__c</members>
+        <members>IndividualApplicationItem.Gross_Annual_kWh_Customer__c</members>
         <members>IndividualApplicationItem.Incentive_Rules_Version__c</members>
         <members>IndividualApplicationItem.Incremental_Cost__c</members>
         <members>IndividualApplicationItem.Invoice_Date__c</members>
+        <members>IndividualApplicationItem.Lifetime_Gen_kWh__c</members>
+        <members>IndividualApplicationItem.Lifetime_Net_Gen_kWh__c</members>
         <members>IndividualApplicationItem.Market_Segment_Room_Type__c</members>
+        <members>IndividualApplicationItem.Measure_Life_Used__c</members>
+        <members>IndividualApplicationItem.NTG_Only_Used__c</members>
+        <members>IndividualApplicationItem.NTG_Total_Used__c</members>
+        <members>IndividualApplicationItem.Participants_Used__c</members>
         <members>IndividualApplicationItem.Program_Factors_Version__c</members>
+        <members>IndividualApplicationItem.Program_Net_Annual_Customer_kWh__c</members>
+        <members>IndividualApplicationItem.Program_Net_Annual_Generator_kWh__c</members>
         <members>IndividualApplicationItem.Proposed_Fixture_Watts__c</members>
         <members>IndividualApplicationItem.Proposed_PPE__c</members>
         <members>IndividualApplicationItem.Proposed_PPF__c</members>
+        <members>IndividualApplicationItem.SM_kW_Gen_PCkW__c</members>
+        <members>IndividualApplicationItem.TD_Loss_Factor_Used__c</members>
         <members>IndividualApplicationItem.Technical_TRM_Version__c</members>
+        <members>IndividualApplicationItem.Total_Net_PCkW_Gen__c</members>
+        <members>IndividualApplicationItem.Total_Net_kW_Customer_PCkW__c</members>
+        <members>IndividualApplicationItem.Total_Only_Net_kW_Customer_PCkW__c</members>
         <members>Location.County__c</members>
         <members>Location.Customer_Fuel_Type__c</members>
+        <members>UsageImpactGroup.Product__c</members>
+        <members>UsageImpactGroupVersion.Measure_Life_Years__c</members>
+        <members>UsageImpactGroupVersion.NTG_Only__c</members>
+        <members>UsageImpactGroupVersion.NTG_Total__c</members>
+        <members>UsageImpactGroupVersion.TD_Loss_Factor__c</members>
+        <members>UsageImpactGroupVersion.Version_Label__c</members>
         <name>CustomField</name>
     </types>
     <types>

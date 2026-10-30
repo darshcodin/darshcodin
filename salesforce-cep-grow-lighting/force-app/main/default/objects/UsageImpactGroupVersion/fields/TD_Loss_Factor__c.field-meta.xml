@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TD_Loss_Factor__c</fullName>
+    <description>Flat factor: transmission and distribution loss factor.</description>
+    <label>T&D Loss Factor</label>
+    <type>Number</type>
+    <precision>8</precision>
+    <scale>4</scale>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SM_kW_Gen_PCkW__c</fullName>
+    <description>Dependent: single-measure generator-level demand savings.</description>
+    <label>SM kW Gen (PCkW)</label>
+    <type>Number</type>
+    <precision>14</precision>
+    <scale>5</scale>
+</CustomField>
