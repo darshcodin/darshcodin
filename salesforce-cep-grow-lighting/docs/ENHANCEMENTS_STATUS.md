@@ -83,7 +83,27 @@ python3 scripts/gen_decision_matrices.py --active   # flip to Active
 sf project deploy start --target-org cep --source-dir force-app/main/default/decisionMatrixVersion
 ```
 
-**Remaining (shared with (1)):** having the Expression Set *consume* these matrices (replace the
-inline `IF()` lookups with Decision Matrix steps) needs the BRE runtime to execute/validate —
-the same gap as (1). The matrices hold the exact lookup values the flow uses now, so results are
-unchanged; this makes a new TRM filing a data change on the matrix instead of a formula edit.
+**Remaining — Expression Set V2 that consumes the matrices.** Investigated the reference
+mechanism directly (deploy-time formula validation, ~28 probes):
+- A matrix lookup is **not** a `stepType` (`ExpsSetStepType`) or `actionType` value.
+- It is a **formula function**: `MAP("Grow_Lighting_Room_Type", Room_Type)` is recognized and
+  returns the matched row as a *string→string map* (confirmed by the type error:
+  `FunctionMap$StringToStringMap … incompatible with NUMBER`).
+- But there is no `ExpsSetDataType` to hold a map, and no accessible getter — `[...]`, `.col`,
+  and `GET`/`GETVALUE`/`VALUEAT`/… are all rejected. `VLOOKUP` is for **context sObjects**
+  (`$ObjectType field reference`), not matrices.
+
+So the exact matrix-lookup formula is **Builder-generated** (the Expression Set Builder writes
+it when you drag in a Decision Matrix), and it can't be reliably hand-authored from metadata —
+and the resulting V2 couldn't execute here anyway (the runtime gap from (1)).
+
+**Clean way to finish V2:** in the Expression Set Builder, add a *Decision Matrix* step to
+`Grow_Lighting_MN_Calculator` referencing `Grow Lighting Room Type` (and `Grow Lighting DLC
+Tier`), save as a new version, then:
+```bash
+sf project retrieve start --target-org cep -m "ExpressionSetDefinitionVersion:Grow_Lighting_MN_Calculator_V2"
+```
+That gives the exact step/formula metadata, which drops straight into this repo.
+
+The matrices already hold the exact lookup values the flow uses, so results are unchanged either
+way — a new TRM filing becomes a data change on the matrix instead of a formula edit.
