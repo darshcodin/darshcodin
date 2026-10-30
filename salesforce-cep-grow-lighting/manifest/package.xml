@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>Benefit.Metric_Code__c</members>
+        <members>BenefitAssignment.Calculated_Value__c</members>
+        <members>BenefitAssignment.Metric_Code__c</members>
+        <members>BenefitAssignment.Metric_Unit__c</members>
         <members>IndividualApplicationItem.Baseline_Watts__c</members>
         <members>IndividualApplicationItem.Calculation_Explainer__c</members>
         <members>IndividualApplicationItem.Customer_Peak_Coincident_kW__c</members>
