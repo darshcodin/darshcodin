@@ -56,7 +56,10 @@ def main():
         "Peak Coincident kW: {!Get_Item.Customer_Peak_Coincident_kW__c} kW<br/>"
         "Incremental Cost: ${!Get_Item.Incremental_Cost__c}<br/><br/>"
         "Versions: {!Get_Item.Technical_TRM_Version__c} / "
-        "{!Get_Item.Program_Factors_Version__c} / {!Get_Item.Incentive_Rules_Version__c}"
+        "{!Get_Item.Program_Factors_Version__c} / {!Get_Item.Incentive_Rules_Version__c}<br/><br/>"
+        "<b>15 Benefit Assignments</b> (rebate + all savings metrics) were created on the "
+        "application. <a href=\"/{!Create_Application}\" target=\"_blank\">Open the Application "
+        "to view Benefit Assignments</a>."
     )
 
     doc = f"""<?xml version="1.0" encoding="UTF-8"?>
