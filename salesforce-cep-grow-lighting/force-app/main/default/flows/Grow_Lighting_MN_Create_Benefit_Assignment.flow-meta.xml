@@ -12,7 +12,7 @@
         <label>Create Benefit Assignment ELECTRIC_REBATE</label>
         <locationX>176</locationX>
         <locationY>760</locationY>
-        <connector><targetReference>Get_Benefit_CUSTOMER_KW</targetReference></connector>
+        <connector><targetReference>Get_Benefit_PROPOSED_PPE</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
             <value><elementReference>Get_Benefit_ELECTRIC_REBATE.Id</elementReference></value>
@@ -57,10 +57,133 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordCreates>
     <recordCreates>
+        <name>Create_BA_PROPOSED_PPE</name>
+        <label>Create Benefit Assignment PROPOSED_PPE</label>
+        <locationX>176</locationX>
+        <locationY>880</locationY>
+        <connector><targetReference>Get_Benefit_BASELINE_WATTS</targetReference></connector>
+        <inputAssignments>
+            <field>BenefitId</field>
+            <value><elementReference>Get_Benefit_PROPOSED_PPE.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Calculated_Value__c</field>
+            <value><elementReference>$Record.Proposed_PPE__c</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EnrolleeId</field>
+            <value><elementReference>Get_Application.AccountId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Code__c</field>
+            <value><stringValue>PROPOSED_PPE</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Unit__c</field>
+            <value><stringValue>umol/J</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentRecordId</field>
+            <value><elementReference>$Record.IndividualApplicationId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ProgramEnrollmentId</field>
+            <value><elementReference>Get_Enrollment.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Active</stringValue></value>
+        </inputAssignments>
+        <object>BenefitAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_BA_BASELINE_WATTS</name>
+        <label>Create Benefit Assignment BASELINE_WATTS</label>
+        <locationX>176</locationX>
+        <locationY>1000</locationY>
+        <connector><targetReference>Get_Benefit_INCREMENTAL_COST</targetReference></connector>
+        <inputAssignments>
+            <field>BenefitId</field>
+            <value><elementReference>Get_Benefit_BASELINE_WATTS.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Calculated_Value__c</field>
+            <value><elementReference>$Record.Baseline_Watts__c</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EnrolleeId</field>
+            <value><elementReference>Get_Application.AccountId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Code__c</field>
+            <value><stringValue>BASELINE_WATTS</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Unit__c</field>
+            <value><stringValue>W</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentRecordId</field>
+            <value><elementReference>$Record.IndividualApplicationId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ProgramEnrollmentId</field>
+            <value><elementReference>Get_Enrollment.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Active</stringValue></value>
+        </inputAssignments>
+        <object>BenefitAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_BA_INCREMENTAL_COST</name>
+        <label>Create Benefit Assignment INCREMENTAL_COST</label>
+        <locationX>176</locationX>
+        <locationY>1120</locationY>
+        <connector><targetReference>Get_Benefit_CUSTOMER_KW</targetReference></connector>
+        <inputAssignments>
+            <field>BenefitId</field>
+            <value><elementReference>Get_Benefit_INCREMENTAL_COST.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Calculated_Value__c</field>
+            <value><elementReference>$Record.Incremental_Cost__c</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>EnrolleeId</field>
+            <value><elementReference>Get_Application.AccountId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Code__c</field>
+            <value><stringValue>INCREMENTAL_COST</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Metric_Unit__c</field>
+            <value><stringValue>USD</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ParentRecordId</field>
+            <value><elementReference>$Record.IndividualApplicationId</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ProgramEnrollmentId</field>
+            <value><elementReference>Get_Enrollment.Id</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value><stringValue>Active</stringValue></value>
+        </inputAssignments>
+        <object>BenefitAssignment</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
         <name>Create_BA_CUSTOMER_KW</name>
         <label>Create Benefit Assignment CUSTOMER_KW</label>
         <locationX>176</locationX>
-        <locationY>880</locationY>
+        <locationY>1240</locationY>
         <connector><targetReference>Get_Benefit_CUSTOMER_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -101,7 +224,7 @@
         <name>Create_BA_CUSTOMER_KWH</name>
         <label>Create Benefit Assignment CUSTOMER_KWH</label>
         <locationX>176</locationX>
-        <locationY>1000</locationY>
+        <locationY>1360</locationY>
         <connector><targetReference>Get_Benefit_CUSTOMER_PCKW</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -142,7 +265,7 @@
         <name>Create_BA_CUSTOMER_PCKW</name>
         <label>Create Benefit Assignment CUSTOMER_PCKW</label>
         <locationX>176</locationX>
-        <locationY>1120</locationY>
+        <locationY>1480</locationY>
         <connector><targetReference>Get_Benefit_SM_KW_GEN</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -183,7 +306,7 @@
         <name>Create_BA_SM_KW_GEN</name>
         <label>Create Benefit Assignment SM_KW_GEN</label>
         <locationX>176</locationX>
-        <locationY>1240</locationY>
+        <locationY>1600</locationY>
         <connector><targetReference>Get_Benefit_GROSS_PCKW_CUST</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -224,7 +347,7 @@
         <name>Create_BA_GROSS_PCKW_CUST</name>
         <label>Create Benefit Assignment GROSS_PCKW_CUST</label>
         <locationX>176</locationX>
-        <locationY>1360</locationY>
+        <locationY>1720</locationY>
         <connector><targetReference>Get_Benefit_TOTAL_ONLY_NET_KW</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -265,7 +388,7 @@
         <name>Create_BA_TOTAL_ONLY_NET_KW</name>
         <label>Create Benefit Assignment TOTAL_ONLY_NET_KW</label>
         <locationX>176</locationX>
-        <locationY>1480</locationY>
+        <locationY>1840</locationY>
         <connector><targetReference>Get_Benefit_TOTAL_NET_KW</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -306,7 +429,7 @@
         <name>Create_BA_TOTAL_NET_KW</name>
         <label>Create Benefit Assignment TOTAL_NET_KW</label>
         <locationX>176</locationX>
-        <locationY>1600</locationY>
+        <locationY>1960</locationY>
         <connector><targetReference>Get_Benefit_TOTAL_NET_PCKW_GEN</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -347,7 +470,7 @@
         <name>Create_BA_TOTAL_NET_PCKW_GEN</name>
         <label>Create Benefit Assignment TOTAL_NET_PCKW_GEN</label>
         <locationX>176</locationX>
-        <locationY>1720</locationY>
+        <locationY>2080</locationY>
         <connector><targetReference>Get_Benefit_GROSS_KWH_CUST</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -388,7 +511,7 @@
         <name>Create_BA_GROSS_KWH_CUST</name>
         <label>Create Benefit Assignment GROSS_KWH_CUST</label>
         <locationX>176</locationX>
-        <locationY>1840</locationY>
+        <locationY>2200</locationY>
         <connector><targetReference>Get_Benefit_PROG_NET_CUST_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -429,7 +552,7 @@
         <name>Create_BA_PROG_NET_CUST_KWH</name>
         <label>Create Benefit Assignment PROG_NET_CUST_KWH</label>
         <locationX>176</locationX>
-        <locationY>1960</locationY>
+        <locationY>2320</locationY>
         <connector><targetReference>Get_Benefit_GEN_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -470,7 +593,7 @@
         <name>Create_BA_GEN_KWH</name>
         <label>Create Benefit Assignment GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2080</locationY>
+        <locationY>2440</locationY>
         <connector><targetReference>Get_Benefit_PROG_NET_GEN_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -511,7 +634,7 @@
         <name>Create_BA_PROG_NET_GEN_KWH</name>
         <label>Create Benefit Assignment PROG_NET_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2200</locationY>
+        <locationY>2560</locationY>
         <connector><targetReference>Get_Benefit_LIFETIME_GEN_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -552,7 +675,7 @@
         <name>Create_BA_LIFETIME_GEN_KWH</name>
         <label>Create Benefit Assignment LIFETIME_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2320</locationY>
+        <locationY>2680</locationY>
         <connector><targetReference>Get_Benefit_LIFETIME_NET_GEN_KWH</targetReference></connector>
         <inputAssignments>
             <field>BenefitId</field>
@@ -593,7 +716,7 @@
         <name>Create_BA_LIFETIME_NET_GEN_KWH</name>
         <label>Create Benefit Assignment LIFETIME_NET_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2440</locationY>
+        <locationY>2800</locationY>
         
         <inputAssignments>
             <field>BenefitId</field>
@@ -700,10 +823,79 @@
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
+        <name>Get_Benefit_PROPOSED_PPE</name>
+        <label>Get Benefit PROPOSED_PPE</label>
+        <locationX>176</locationX>
+        <locationY>820</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Create_BA_PROPOSED_PPE</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product2Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Get_Program_Product.ProductId</elementReference></value>
+        </filters>
+        <filters>
+            <field>Metric_Code__c</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>PROPOSED_PPE</stringValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Benefit</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Benefit_BASELINE_WATTS</name>
+        <label>Get Benefit BASELINE_WATTS</label>
+        <locationX>176</locationX>
+        <locationY>940</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Create_BA_BASELINE_WATTS</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product2Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Get_Program_Product.ProductId</elementReference></value>
+        </filters>
+        <filters>
+            <field>Metric_Code__c</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>BASELINE_WATTS</stringValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Benefit</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_Benefit_INCREMENTAL_COST</name>
+        <label>Get Benefit INCREMENTAL_COST</label>
+        <locationX>176</locationX>
+        <locationY>1060</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector><targetReference>Create_BA_INCREMENTAL_COST</targetReference></connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Product2Id</field>
+            <operator>EqualTo</operator>
+            <value><elementReference>Get_Program_Product.ProductId</elementReference></value>
+        </filters>
+        <filters>
+            <field>Metric_Code__c</field>
+            <operator>EqualTo</operator>
+            <value><stringValue>INCREMENTAL_COST</stringValue></value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Benefit</object>
+        <queriedFields>Id</queriedFields>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
         <name>Get_Benefit_CUSTOMER_KW</name>
         <label>Get Benefit CUSTOMER_KW</label>
         <locationX>176</locationX>
-        <locationY>820</locationY>
+        <locationY>1180</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_CUSTOMER_KW</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -726,7 +918,7 @@
         <name>Get_Benefit_CUSTOMER_KWH</name>
         <label>Get Benefit CUSTOMER_KWH</label>
         <locationX>176</locationX>
-        <locationY>940</locationY>
+        <locationY>1300</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_CUSTOMER_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -749,7 +941,7 @@
         <name>Get_Benefit_CUSTOMER_PCKW</name>
         <label>Get Benefit CUSTOMER_PCKW</label>
         <locationX>176</locationX>
-        <locationY>1060</locationY>
+        <locationY>1420</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_CUSTOMER_PCKW</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -772,7 +964,7 @@
         <name>Get_Benefit_SM_KW_GEN</name>
         <label>Get Benefit SM_KW_GEN</label>
         <locationX>176</locationX>
-        <locationY>1180</locationY>
+        <locationY>1540</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_SM_KW_GEN</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -795,7 +987,7 @@
         <name>Get_Benefit_GROSS_PCKW_CUST</name>
         <label>Get Benefit GROSS_PCKW_CUST</label>
         <locationX>176</locationX>
-        <locationY>1300</locationY>
+        <locationY>1660</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_GROSS_PCKW_CUST</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -818,7 +1010,7 @@
         <name>Get_Benefit_TOTAL_ONLY_NET_KW</name>
         <label>Get Benefit TOTAL_ONLY_NET_KW</label>
         <locationX>176</locationX>
-        <locationY>1420</locationY>
+        <locationY>1780</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_TOTAL_ONLY_NET_KW</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -841,7 +1033,7 @@
         <name>Get_Benefit_TOTAL_NET_KW</name>
         <label>Get Benefit TOTAL_NET_KW</label>
         <locationX>176</locationX>
-        <locationY>1540</locationY>
+        <locationY>1900</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_TOTAL_NET_KW</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -864,7 +1056,7 @@
         <name>Get_Benefit_TOTAL_NET_PCKW_GEN</name>
         <label>Get Benefit TOTAL_NET_PCKW_GEN</label>
         <locationX>176</locationX>
-        <locationY>1660</locationY>
+        <locationY>2020</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_TOTAL_NET_PCKW_GEN</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -887,7 +1079,7 @@
         <name>Get_Benefit_GROSS_KWH_CUST</name>
         <label>Get Benefit GROSS_KWH_CUST</label>
         <locationX>176</locationX>
-        <locationY>1780</locationY>
+        <locationY>2140</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_GROSS_KWH_CUST</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -910,7 +1102,7 @@
         <name>Get_Benefit_PROG_NET_CUST_KWH</name>
         <label>Get Benefit PROG_NET_CUST_KWH</label>
         <locationX>176</locationX>
-        <locationY>1900</locationY>
+        <locationY>2260</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_PROG_NET_CUST_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -933,7 +1125,7 @@
         <name>Get_Benefit_GEN_KWH</name>
         <label>Get Benefit GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2020</locationY>
+        <locationY>2380</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_GEN_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -956,7 +1148,7 @@
         <name>Get_Benefit_PROG_NET_GEN_KWH</name>
         <label>Get Benefit PROG_NET_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2140</locationY>
+        <locationY>2500</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_PROG_NET_GEN_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -979,7 +1171,7 @@
         <name>Get_Benefit_LIFETIME_GEN_KWH</name>
         <label>Get Benefit LIFETIME_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2260</locationY>
+        <locationY>2620</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_LIFETIME_GEN_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>
@@ -1002,7 +1194,7 @@
         <name>Get_Benefit_LIFETIME_NET_GEN_KWH</name>
         <label>Get Benefit LIFETIME_NET_GEN_KWH</label>
         <locationX>176</locationX>
-        <locationY>2380</locationY>
+        <locationY>2740</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector><targetReference>Create_BA_LIFETIME_NET_GEN_KWH</targetReference></connector>
         <filterLogic>and</filterLogic>

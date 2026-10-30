@@ -74,6 +74,8 @@
         <name>Flow</name>
     </types>
     <types>
+        <members>BenefitAssignment-Benefit Assignment Layout</members>
+        <members>IndividualApplication-Individual Application Layout</members>
         <members>IndividualApplicationItem-Individual Application Item Layout</members>
         <name>Layout</name>
     </types>

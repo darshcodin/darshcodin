@@ -24,7 +24,7 @@ once in the Lightning App Builder — the quick action is already deployed.)*
 
 ### Savings Store — all metrics mapped to the application
 The after-save flow creates **one BenefitAssignment per metric** under the application
-(Savings Store · Option A): the rebate (USD) plus all 14 savings metrics (kW / kWh), each with
+(Savings Store · Option A): the rebate (USD) plus all 17 savings/cost/metric values (kW / kWh), each with
 its typed value in `Calculated_Value__c` and `Metric_Unit__c`. A single line produces **15
 BenefitAssignments**, all mapped to the `IndividualApplication` — verified.
 

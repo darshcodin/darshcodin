@@ -17,6 +17,9 @@ cid(){ sf data create record --target-org "$ORG" --sobject "$1" --values "$2" --
 sf data update record --target-org "$ORG" --sobject Benefit --record-id "$BENEFIT_ID" --values "Metric_Code__c=ELECTRIC_REBATE" >/dev/null 2>&1 || true
 
 metrics=(
+  "PROPOSED_PPE|Proposed PPE"
+  "BASELINE_WATTS|Baseline Watts (derived)"
+  "INCREMENTAL_COST|Incremental Cost"
   "CUSTOMER_KW|Customer kW Demand Savings"
   "CUSTOMER_KWH|Customer kWh Energy Savings"
   "CUSTOMER_PCKW|Peak Coincident kW"

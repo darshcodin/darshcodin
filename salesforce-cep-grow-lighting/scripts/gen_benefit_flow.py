@@ -10,6 +10,9 @@ import os
 # (code, line field, unit, is_rebate)
 METRICS = [
     ("ELECTRIC_REBATE", "Electric_Rebate__c", "USD", True),
+    ("PROPOSED_PPE", "Proposed_PPE__c", "umol/J", False),
+    ("BASELINE_WATTS", "Baseline_Watts__c", "W", False),
+    ("INCREMENTAL_COST", "Incremental_Cost__c", "USD", False),
     ("CUSTOMER_KW", "Customer_kW_Savings__c", "kW", False),
     ("CUSTOMER_KWH", "Customer_kWh_Savings__c", "kWh", False),
     ("CUSTOMER_PCKW", "Customer_Peak_Coincident_kW__c", "kW", False),
