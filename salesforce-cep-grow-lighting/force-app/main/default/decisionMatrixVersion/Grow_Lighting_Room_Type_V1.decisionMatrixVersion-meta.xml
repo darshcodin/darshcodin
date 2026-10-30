@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DecisionMatrixDefinitionVersion xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <columnType>Input</columnType>
+        <dataType>Text</dataType>
+        <displaySequence>1</displaySequence>
+        <name>Room_Type</name>
+    </columns>
+    <columns>
+        <columnType>Output</columnType>
+        <dataType>Number</dataType>
+        <displaySequence>2</displaySequence>
+        <name>Hours</name>
+    </columns>
+    <columns>
+        <columnType>Output</columnType>
+        <dataType>Number</dataType>
+        <displaySequence>3</displaySequence>
+        <name>kWh_Factor</name>
+    </columns>
+    <columns>
+        <columnType>Output</columnType>
+        <dataType>Number</dataType>
+        <displaySequence>4</displaySequence>
+        <name>CF</name>
+    </columns>
+    <decisionMatrixDefinition>Grow_Lighting_Room_Type</decisionMatrixDefinition>
+    <label>Grow Lighting Room Type V1</label>
+    <startDate>2026-01-01T00:00:00.000Z</startDate>
+    <status>Active</status>
+    <versionNumber>1</versionNumber>
+</DecisionMatrixDefinitionVersion>

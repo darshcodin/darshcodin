@@ -46,6 +46,16 @@
         <name>CustomField</name>
     </types>
     <types>
+        <members>Grow_Lighting_DLC_Tier</members>
+        <members>Grow_Lighting_Room_Type</members>
+        <name>DecisionMatrixDefinition</name>
+    </types>
+    <types>
+        <members>Grow_Lighting_DLC_Tier_V1</members>
+        <members>Grow_Lighting_Room_Type_V1</members>
+        <name>DecisionMatrixDefinitionVersion</name>
+    </types>
+    <types>
         <members>Grow_Lighting_MN_Calculator</members>
         <name>ExpressionSetDefinition</name>
     </types>

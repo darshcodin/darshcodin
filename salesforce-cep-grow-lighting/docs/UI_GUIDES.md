@@ -42,10 +42,15 @@ numbers, even though this org can't call it from Flow.
 
 ---
 
-## B. Build the two Decision Matrices (enhancement 4)
+## B. Decision Matrices (enhancement 4) — ALREADY BUILT
+
+> **Update:** these two matrices are now **built, populated and active** in the org (done via
+> metadata + data API — see `docs/ENHANCEMENTS_STATUS.md` §4). The manual steps below are kept
+> only as reference / for rebuilding elsewhere. The one remaining piece — having the Expression
+> Set consume them — needs the BRE runtime (same gap as section C).
 
 Moves the Room Type and DLC Tier lookups out of inline `IF()` into native Decision Matrices,
-so a new TRM filing is a data change on the matrix. Row data is ready in `data/*.csv`.
+so a new TRM filing is a data change on the matrix. Row data is in `data/*.csv`.
 
 ### B1. Create the matrices
 1. **Setup** → Quick Find: **Decision Matrices** → **New** (or Business Rules Engine app →

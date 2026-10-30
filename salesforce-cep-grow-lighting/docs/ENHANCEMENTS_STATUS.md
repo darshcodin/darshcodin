@@ -7,7 +7,7 @@ Tracking the four enhancements requested after the end-to-end build.
 | 2 | TRM reference data (Usage Impact model, invoice-date selection) | ✅ **Done & verified** |
 | 3 | 11 dependent Electric DSM roll-up metrics | ✅ **Done & verified** |
 | 1 | Switch orchestration to invoke the Expression Set directly | ⚠️ **Org constraint: no BRE runtime API** (details below) |
-| 4 | Move the two lookups into Decision Matrices | ⏳ **Needs BRE Decision Matrix Builder UI** |
+| 4 | Move the two lookups into Decision Matrices | ✅ **Matrices built, populated & active** — consuming them via the ES is gated on the same BRE runtime as (1) |
 
 ## ✅ (2) TRM reference data
 Standard Usage Impact model: `UsageImpactGroup` *MN Grow Lighting - Technical* →
@@ -53,25 +53,37 @@ In an org with the BRE runtime fully provisioned, finishing (1) is a one-element
 the formula block with a single **Run Expression Set** action passing the five inputs. No other
 part of the flow changes.
 
-## ⏳ (4) Decision Matrices for the Room Type and DLC Tier lookups
-Confirmed the native BRE **Decision Matrix metadata schema** by deploying a definition:
-`DecisionMatrixDefinition` takes `label` + `type` (Standard|Grouped) + versions
-(`startDate`, `status`, `versionNumber`); `DecisionMatrixDefinitionVersion` takes `columns`
-(`columnType` Input|Output, `dataType`, `displaySequence`, `name`). **Rows are data**
-(CSV-uploaded), not metadata.
+## ✅ (4) Decision Matrices for the Room Type and DLC Tier lookups
+Both matrices are **built, populated and active** — done headlessly, no UI required.
+(An earlier note here said this needed the UI; that was wrong. The blocker then was a stale,
+empty matrix left by a failed delete, which made every redeploy look like a conflicting
+"subsequent version." From a clean slate it deploys fine.)
 
-Constraint hit: columns must be created with the matrix in the **BRE Decision Matrix Builder
-UI** — a metadata-only deploy can create the shell but not the first set of columns
-(the API reports *"can't create subsequent versions … that has no columns"*). So this step
-needs the UI (and, to run via the Expression Set, `BRERuntime`).
+**How it's structured:**
+- `DecisionMatrixDefinition` (metadata): `label` + `type` Standard.
+- `DecisionMatrixDefinitionVersion` (metadata): the **columns** — `columnType` Input|Output,
+  `dataType` Text|Number, `displaySequence`, `name`. Deploy the definition **and** version
+  together from a clean slate (the version must carry the columns at creation).
+- **Rows are data**, stored on the backing `CalculationMatrixVersion` as `CalculationMatrixRow`
+  records with `InputData`/`OutputData` JSON — e.g.
+  `{"Room_Type":"Cannabis Flower Room"}` → `{"Hours":4255,"kWh_Factor":1.16,"CF":0.68}`.
+  Loaded via the data API, not metadata.
 
-Path to finish:
-1. In the org: **Business Rules Engine → Decision Matrices → New** — create
-   `Grow Lighting Room Type` (input `Room_Type`; outputs `Hours`, `kWh_Factor`, `CF`) and
-   `Grow Lighting DLC Tier` (input `DLC_Tier`; outputs `DLC_Adj`, `Effective_Rate`).
-2. Upload the rows from `data/room_type_matrix.csv` and `data/dlc_tier_matrix.csv`.
-3. Add matrix-lookup steps to the Expression Set (replacing the inline `IF()` lookups) and
-   retrieve the updated metadata into this project.
+**Deployed & verified:**
+- `Grow_Lighting_Room_Type` — input `Room_Type`; outputs `Hours`, `kWh_Factor`, `CF`; **7 rows**.
+- `Grow_Lighting_DLC_Tier` — input `DLC_Tier`; outputs `DLC_Adj`, `Effective_Rate`; **3 rows**.
+- Both version status **Active**; row data queried back and confirmed correct.
 
-The lookup **data is identical** to what the inline lookups and the flow already use, so
-results are unchanged — the matrices make new TRM filings a data change on the matrix.
+Build it anywhere:
+```bash
+python3 scripts/gen_decision_matrices.py            # Draft metadata
+sf project deploy start --target-org cep --source-dir force-app/main/default/decisionMatrixDefinition --source-dir force-app/main/default/decisionMatrixVersion
+python3 scripts/load_matrix_rows.py cep             # rows from data/*.csv
+python3 scripts/gen_decision_matrices.py --active   # flip to Active
+sf project deploy start --target-org cep --source-dir force-app/main/default/decisionMatrixVersion
+```
+
+**Remaining (shared with (1)):** having the Expression Set *consume* these matrices (replace the
+inline `IF()` lookups with Decision Matrix steps) needs the BRE runtime to execute/validate —
+the same gap as (1). The matrices hold the exact lookup values the flow uses now, so results are
+unchanged; this makes a new TRM filing a data change on the matrix instead of a formula edit.
