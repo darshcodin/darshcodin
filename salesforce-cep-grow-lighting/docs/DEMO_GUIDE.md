@@ -8,11 +8,35 @@ Everything below is **deployed and verified** in org `ibm81`.
 | Component | API name | Purpose |
 |---|---|---|
 | Expression Set (BRE) | `Grow_Lighting_MN_Calculator` | savings + rebate rules engine |
-| Before-save Flow | `Grow_Lighting_MN_Calculate_Line` | on line submit → computes outputs + lineage |
-| After-save Flow | `Grow_Lighting_MN_Create_Benefit_Assignment` | → awards the rebate as a BenefitAssignment |
+| Decision Matrices | `Grow_Lighting_Room_Type`, `Grow_Lighting_DLC_Tier` | lookups (TRM-versionable) |
+| Before-save Flow | `Grow_Lighting_MN_Calculate_Line` | on line submit → computes outputs + 11 dependent metrics + lineage |
+| After-save Flow | `Grow_Lighting_MN_Create_Benefit_Assignment` | maps **all** metrics to the application as BenefitAssignments |
 | Screen Flow | `Grow_Lighting_MN_Rebate_Application` | guided UI: capture inputs → results |
-| Custom fields | on `IndividualApplicationItem`, `Location` | inputs, outputs, lineage |
+| **Button** | `Calculate_Grow_Lighting_Rebate` (quick action) | launches the Screen Flow from the line item |
+| Custom fields | on `IndividualApplicationItem`, `Location`, `Benefit`, `BenefitAssignment`, `UsageImpactGroup(Version)` | inputs, outputs, dependent metrics, TRM, savings store, lineage |
 | Permission set | `CEP_Grow_Lighting_Calculator` | field access for program users |
+
+### Stakeholder demo entry point (button)
+On an **Individual Application Line Item** record, the **Calculate Grow Lighting Rebate**
+action (in the action bar) launches the guided Screen Flow. *(If your org uses a custom
+Lightning record page for this object instead of the page layout, add the action to that page
+once in the Lightning App Builder — the quick action is already deployed.)*
+
+### Savings Store — all metrics mapped to the application
+The after-save flow creates **one BenefitAssignment per metric** under the application
+(Savings Store · Option A): the rebate (USD) plus all 14 savings metrics (kW / kWh), each with
+its typed value in `Calculated_Value__c` and `Metric_Unit__c`. A single line produces **15
+BenefitAssignments**, all mapped to the `IndividualApplication` — verified.
+
+### OmniScript for inputs (note)
+A functional OmniScript (input elements + save action) is authored in the **OmniStudio
+Designer** — its element/`propertySetConfig` JSON isn't practically hand-authorable from
+metadata (same Designer-gated situation as the BRE matrix step). The **Screen Flow above is the
+working, equivalent guided input UI** and is what the button launches. To build the OmniScript:
+in the OmniStudio Designer create a one-step OmniScript with Number/Select inputs for
+`Qty, Room Type, PPF, Fixture Watts, DLC Tier, Invoice Date`, and a save step that creates an
+`IndividualApplicationItem` (which triggers the same calc + benefit flows). Retrieve it with
+`sf project retrieve start -m "OmniScript:<name>"` and it drops into this repo.
 
 Demo data (seeded): Program *Lighting – MN*, Product *MN – Lighting Efficiency Rebate*,
 ProgramProduct, Benefit *MN Lighting Efficiency Rebate* (active, linked to the Expression
