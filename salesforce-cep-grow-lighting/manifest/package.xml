@@ -74,12 +74,20 @@
         <name>Flow</name>
     </types>
     <types>
+        <members>IndividualApplicationItem-Individual Application Item Layout</members>
+        <name>Layout</name>
+    </types>
+    <types>
         <members>CEP_Grow_Lighting_Calculator</members>
         <name>PermissionSet</name>
     </types>
     <types>
         <members>Admin</members>
         <name>Profile</name>
+    </types>
+    <types>
+        <members>IndividualApplicationItem.Calculate_Grow_Lighting_Rebate</members>
+        <name>QuickAction</name>
     </types>
     <version>62.0</version>
 </Package>
