@@ -8,5 +8,5 @@
   "name": "cep-grow-lighting-mn",
   "namespace": "",
   "sfdcLoginUrl": "https://test.salesforce.com",
-  "sourceApiVersion": "62.0"
+  "sourceApiVersion": "63.0"
 }

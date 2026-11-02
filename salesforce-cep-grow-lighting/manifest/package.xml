@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
+        <members>GrowLightingContext</members>
+        <name>ContextDefinition</name>
+    </types>
+    <types>
         <members>Benefit.Metric_Code__c</members>
         <members>BenefitAssignment.Calculated_Value__c</members>
         <members>BenefitAssignment.Metric_Code__c</members>
@@ -61,10 +65,12 @@
     </types>
     <types>
         <members>Grow_Lighting_MN_Calculator</members>
+        <members>Grow_Lighting_MN_Context_Calc</members>
         <name>ExpressionSetDefinition</name>
     </types>
     <types>
         <members>Grow_Lighting_MN_Calculator_V1</members>
+        <members>Grow_Lighting_MN_Context_Calc_V1</members>
         <name>ExpressionSetDefinitionVersion</name>
     </types>
     <types>
@@ -91,5 +97,5 @@
         <members>IndividualApplicationItem.Calculate_Grow_Lighting_Rebate</members>
         <name>QuickAction</name>
     </types>
-    <version>62.0</version>
+    <version>63.0</version>
 </Package>

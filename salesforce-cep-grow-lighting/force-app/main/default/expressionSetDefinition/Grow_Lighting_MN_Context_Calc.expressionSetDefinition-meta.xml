@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExpressionSetDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextDefinitions>GrowLightingContext</contextDefinitions>
+    <description>Context-hydrated Grow Lighting MN calculator. Inputs assembled by the Context Service (GrowLightingContext) from the application line; computes rebate + initial savings.</description>
+    <interfaceSourceType>Bre</interfaceSourceType>
+    <label>Grow Lighting MN Context Calc</label>
+    <processType>Bre</processType>
+    <template>false</template>
+    <versions>
+        <fullName>Grow_Lighting_MN_Context_Calc_V1</fullName>
+        <expressionSetDefinition>Grow_Lighting_MN_Context_Calc</expressionSetDefinition>
+        <interfaceSourceType>Bre</interfaceSourceType>
+        <label>Grow Lighting MN Context Calc V1</label>
+        <processType>Bre</processType>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
+        <startDate>2026-01-01T00:00:00.000Z</startDate>
+        <status>Draft</status>
+        <versionNumber>1</versionNumber>
+    </versions>
+</ExpressionSetDefinition>
