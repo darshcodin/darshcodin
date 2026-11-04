@@ -5,7 +5,7 @@
     <label>P2 Efficiency Delta Savings V1</label>
     <processType>Bre</processType>
     <rank>1</rank>
-    <shouldShowExplExternally>true</shouldShowExplExternally>
+    <shouldShowExplExternally>false</shouldShowExplExternally>
     <startDate>2026-01-01T00:00:00.000Z</startDate>
     <status>Active</status>
     <steps>
@@ -19,8 +19,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>1</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -34,8 +34,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>2</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -49,8 +49,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>3</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -64,8 +64,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>4</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -79,8 +79,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>5</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -94,8 +94,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>6</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <steps>
@@ -109,8 +109,8 @@
         <resultIncluded>true</resultIncluded>
         <sequenceNumber>7</sequenceNumber>
         <shouldExposExecPathMsgOnly>false</shouldExposExecPathMsgOnly>
-        <shouldExposeConditionDetails>true</shouldExposeConditionDetails>
-        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <shouldExposeConditionDetails>false</shouldExposeConditionDetails>
+        <shouldShowExplExternally>false</shouldShowExplExternally>
         <stepType>BusinessKnowledgeModel</stepType>
     </steps>
     <variables>
