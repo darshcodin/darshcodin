@@ -167,7 +167,36 @@ ASSIGNMENTS = r'''    <assignments>
 @@RES@@
         <connector><targetReference>Commit_Results</targetReference></connector>
     </assignments>'''
-DECISIONS = r'''    <decisions>
+DECISIONS = r'''
+    <decisions>
+        <name>Check_Patterns_Supported</name>
+        <label>6b Patterns Have A Registered Executor</label>
+        <locationX>176</locationX><locationY>938</locationY>
+        <defaultConnector><targetReference>Mark_Failed_Unsupported_Pattern</targetReference></defaultConnector>
+        <defaultConnectorLabel>Unregistered pattern</defaultConnectorLabel>
+        <rules>
+            <name>Patterns_Registered</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>vTechVer.CalcPattern__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue><stringValue>P2_EffDelta</stringValue></rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>vTechVer.Incentive_Pattern__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue><stringValue>I2_PerUnitBonus</stringValue></rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>vTechVer.Reporting_Pattern__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue><stringValue>R1_StdReporting</stringValue></rightValue>
+            </conditions>
+            <connector><targetReference>Stamp_Version_Refs</targetReference></connector>
+            <label>All three patterns registered</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>Route_By_Role</name>
         <label>5a Route By Version Role</label>
         <locationX>352</locationX><locationY>758</locationY>
@@ -231,7 +260,7 @@ DECISIONS = r'''    <decisions>
                 <operator>IsNull</operator>
                 <rightValue><booleanValue>false</booleanValue></rightValue>
             </conditions>
-            <connector><targetReference>Stamp_Version_Refs</targetReference></connector>
+            <connector><targetReference>Check_Patterns_Supported</targetReference></connector>
             <label>All three found</label>
         </rules>
     </decisions>'''
@@ -337,7 +366,34 @@ RECORD_LOOKUPS = r'''    <recordLookups>
         <object>ContextDefinition</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>'''
-RECORD_UPDATES = r'''    <recordUpdates>
+RECORD_UPDATES = r'''
+    <recordUpdates>
+        <name>Mark_Failed_Unsupported_Pattern</name>
+        <label>Mark Failed Unsupported Pattern</label>
+        <locationX>352</locationX><locationY>938</locationY>
+        <inputAssignments>
+            <field>Calculation_Status__c</field>
+            <value><stringValue>Failed</stringValue></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Calculation_Error__c</field>
+            <value><elementReference>fUnsupportedMsg</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Savings_Expression_Set__c</field>
+            <value><elementReference>vTechVer.CalcPattern__c</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Incentive_Expression_Set__c</field>
+            <value><elementReference>vTechVer.Incentive_Pattern__c</elementReference></value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Reporting_Expression_Set__c</field>
+            <value><elementReference>vTechVer.Reporting_Pattern__c</elementReference></value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>Stamp_Version_Refs</name>
         <label>7 Stamp Version References</label>
         <locationX>176</locationX><locationY>998</locationY>
@@ -397,6 +453,11 @@ RECORD_UPDATES = r'''    <recordUpdates>
         <inputReference>$Record</inputReference>
     </recordUpdates>'''
 CONTEXT_FORMULA = """    <formulas>
+        <name>fUnsupportedMsg</name>
+        <dataType>String</dataType>
+        <expression>"No executor is registered for this measure's calculation patterns (" &amp; {!vTechVer.CalcPattern__c} &amp; " / " &amp; {!vTechVer.Incentive_Pattern__c} &amp; " / " &amp; {!vTechVer.Reporting_Pattern__c} &amp; "). Register the pattern before calculating."</expression>
+    </formulas>
+    <formulas>
         <name>fContextData</name>
         <dataType>String</dataType>
         <expression>'{"IndividualApplicationItem":[{"id":"' &amp; {!$Record.Id} &amp; '"}]}'</expression>
