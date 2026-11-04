@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calculation_Run_Timestamp__c</fullName>
+    <externalId>false</externalId>
+    <label>Calculation Run Timestamp</label>
+    <required>false</required>
+    <description></description>
+    <trackHistory>false</trackHistory>
+    <type>DateTime</type>
+</CustomField>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calculation_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Calculation Status</label>
+    <required>false</required>
+    <description>Drives and records the calculation. Setting it to Requested fires CEP_Calculate_Line; the flow then sets Calculated or Failed, which stops the re-trigger.</description>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Not Calculated</fullName><default>true</default><label>Not Calculated</label></value>
+            <value><fullName>Requested</fullName><default>false</default><label>Requested</label></value>
+            <value><fullName>Calculated</fullName><default>false</default><label>Calculated</label></value>
+            <value><fullName>Failed</fullName><default>false</default><label>Failed</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

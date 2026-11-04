@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Technical_Version__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Technical TRM Version Ref</label>
+    <referenceTo>UsageImpactGroupVersion</referenceTo>
+    <relationshipLabel>Technical TRM Version Ref</relationshipLabel>
+    <relationshipName>Technical_Version_Lines</relationshipName>
+    <required>false</required>
+    <description>The Technical TRM version whose effective window covered the invoice date at calculation time.</description>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

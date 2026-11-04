@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calc_Pattern_Used__c</fullName>
+    <externalId>false</externalId>
+    <label>Calc Pattern Used</label>
+    <length>80</length>
+    <required>false</required>
+    <description>The Calc Pattern value read from the technical version. Kept for lineage even if the pattern is later repointed.</description>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

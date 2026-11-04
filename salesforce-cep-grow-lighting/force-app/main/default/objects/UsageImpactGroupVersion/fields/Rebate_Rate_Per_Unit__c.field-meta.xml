@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Rebate_Rate_Per_Unit__c</fullName>
+    <externalId>false</externalId>
+    <label>Rebate Rate Per Unit</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>4</scale>
+    <description>Incentive rate per unit of the measure's billing unit, e.g. 0.70 per watt.</description>
+    <trackHistory>false</trackHistory>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

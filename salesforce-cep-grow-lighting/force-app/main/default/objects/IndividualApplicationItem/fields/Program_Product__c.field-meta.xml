@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Program_Product__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Program Product</label>
+    <referenceTo>ProgramProduct</referenceTo>
+    <relationshipLabel>Program Product</relationshipLabel>
+    <relationshipName>Grow_Lighting_Lines</relationshipName>
+    <required>false</required>
+    <description>The program/product pairing for this line. The calculate flow reads its Program and Product to find the matching Program Measure rows.</description>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

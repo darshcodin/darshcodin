@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExpressionSetDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextDefinitions>CEP_Line_Calc_Context</contextDefinitions>
+    <description>Reporting pattern: turns the gross output contract into the eleven net and lifetime DSM metrics using the Program Factors version. Measure agnostic - one active version serves every electric measure in the portfolio.</description>
+    <interfaceSourceType>Bre</interfaceSourceType>
+    <label>R1 Standard Net and Lifetime Reporting</label>
+    <processType>Bre</processType>
+    <template>false</template>
+    <versions>
+        <fullName>R1_StdReporting_V1</fullName>
+        <expressionSetDefinition>R1_StdReporting</expressionSetDefinition>
+        <interfaceSourceType>Bre</interfaceSourceType>
+        <label>R1 Standard Net and Lifetime Reporting V1</label>
+        <processType>Bre</processType>
+        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <startDate>2026-01-01T00:00:00.000Z</startDate>
+        <status>Draft</status>
+        <versionNumber>1</versionNumber>
+    </versions>
+</ExpressionSetDefinition>

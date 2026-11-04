@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CalcPattern__c</fullName>
+    <externalId>false</externalId>
+    <label>Calc Pattern</label>
+    <length>80</length>
+    <required>false</required>
+    <description>API name of the savings Expression Set this technical version drives, e.g. P2_EffDelta. This is the reusability hook: a new measure points at an existing pattern instead of needing a new rule set.</description>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

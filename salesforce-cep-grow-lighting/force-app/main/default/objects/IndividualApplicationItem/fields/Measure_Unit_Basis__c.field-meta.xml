@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Measure_Unit_Basis__c</fullName>
+    <externalId>false</externalId>
+    <label>Measure Unit Basis</label>
+    <length>40</length>
+    <required>false</required>
+    <description>The billing unit the incentive rate applies to, e.g. Watts, Horsepower, SqFt.</description>
+    <trackHistory>false</trackHistory>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

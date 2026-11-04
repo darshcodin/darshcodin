@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExpressionSetDefinition xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextDefinitions>CEP_Line_Calc_Context</contextDefinitions>
+    <description>Incentive pattern: a per-unit rate times a bonus multiplier, capped at a maximum. Serves any measure paid per unit of its billing basis. Measure_Quantity is handed in from whichever savings pattern ran.</description>
+    <interfaceSourceType>Bre</interfaceSourceType>
+    <label>I2 Per Unit Bonus Incentive</label>
+    <processType>Bre</processType>
+    <template>false</template>
+    <versions>
+        <fullName>I2_PerUnitBonus_V1</fullName>
+        <expressionSetDefinition>I2_PerUnitBonus</expressionSetDefinition>
+        <interfaceSourceType>Bre</interfaceSourceType>
+        <label>I2 Per Unit Bonus Incentive V1</label>
+        <processType>Bre</processType>
+        <shouldShowExplExternally>true</shouldShowExplExternally>
+        <startDate>2026-01-01T00:00:00.000Z</startDate>
+        <status>Draft</status>
+        <versionNumber>1</versionNumber>
+    </versions>
+</ExpressionSetDefinition>

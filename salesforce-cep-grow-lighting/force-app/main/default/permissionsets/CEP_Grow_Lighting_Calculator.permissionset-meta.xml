@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
-    <label>CEP Grow Lighting Calculator</label>
-    <description>Field access for the Grow Lighting MN rebate calculator (inputs, outputs, dependent metrics, TRM, lineage).</description>
+    <description>Field-level security and access for the CEP reusable line calculator.</description>
     <hasActivationRequired>false</hasActivationRequired>
+    <label>CEP Grow Lighting Calculator</label>
     <fieldPermissions>
         <editable>true</editable>
         <field>Benefit.Metric_Code__c</field>
@@ -30,7 +30,32 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>IndividualApplicationItem.Calc_Pattern_Used__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Calculation_Error__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>IndividualApplicationItem.Calculation_Explainer__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Calculation_Run_Timestamp__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Calculation_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Context_Definition_Used__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -85,6 +110,36 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>IndividualApplicationItem.Gross_PCkW__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Gross_Therms__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Gross_kW__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Gross_kWh__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Incentive_Expression_Set__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Incentive_Rules_Version_Ref__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>IndividualApplicationItem.Incentive_Rules_Version__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -120,6 +175,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>IndividualApplicationItem.Measure_Quantity__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Measure_Unit_Basis__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>IndividualApplicationItem.NTG_Only_Used__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -131,6 +196,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>IndividualApplicationItem.Participants_Used__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Program_Factors_Version_Ref__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -150,6 +220,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>IndividualApplicationItem.Program_Product__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>IndividualApplicationItem.Proposed_Fixture_Watts__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -165,7 +240,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>IndividualApplicationItem.Reporting_Expression_Set__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>IndividualApplicationItem.SM_kW_Gen_PCkW__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Savings_Expression_Set__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -176,6 +261,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>IndividualApplicationItem.Technical_TRM_Version__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>IndividualApplicationItem.Technical_Version__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -210,6 +300,51 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>UsageImpactGroup.Version_Role__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Base_Reflector_Eff__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Baseline_Efficacy__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Bonus_Multiplier__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.CalcPattern__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Cooling_Factor__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Inc_Cost_Per_Unit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Incentive_Pattern__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Max_Incentive__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>UsageImpactGroupVersion.Measure_Life_Years__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -221,6 +356,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>UsageImpactGroupVersion.NTG_Total__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Prop_Reflector_Eff__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Rebate_Rate_Per_Unit__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>UsageImpactGroupVersion.Reporting_Pattern__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
