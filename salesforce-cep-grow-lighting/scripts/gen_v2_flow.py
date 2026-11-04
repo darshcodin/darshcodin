@@ -50,7 +50,8 @@ FORMULAS = [
     ("fMeasureQty", 2, f"{QTY} * {WATT}"),
     # incentive layer - mirrors I2_PerUnitBonus
     ("fBaseIncentive", 2, f"{{!fMeasureQty}} * ROUND({I}Rebate_Rate_Per_Unit__c}} * {I}Bonus_Multiplier__c}}, 2)"),
-    ("fIncentive", 2, f"IF(AND(NOT(ISBLANK({I}Max_Incentive__c}})), {I}Max_Incentive__c}} > 0, {{!fBaseIncentive}} > {I}Max_Incentive__c}}), {I}Max_Incentive__c}}, {{!fBaseIncentive}})"),
+    # kept character-identical to Expression Set I2_PerUnitBonus step CalcCappedIncentive
+    ("fIncentive", 2, f"IF(AND({I}Max_Incentive__c}} > 0, {{!fBaseIncentive}} > {I}Max_Incentive__c}}), {I}Max_Incentive__c}}, {{!fBaseIncentive}})"),
     ("fIncCost", 2, f"{{!fMeasureQty}} * {I}Inc_Cost_Per_Unit__c}}"),
     # reporting layer - mirrors R1_StdReporting, measure agnostic
     ("fSMkWGen", 5, f"{{!fGrossPCkW}} * {P}TD_Loss_Factor__c}}"),

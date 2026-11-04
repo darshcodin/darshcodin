@@ -404,7 +404,7 @@
     <formulas>
         <name>fIncentive</name>
         <dataType>Number</dataType>
-        <expression>IF(AND(NOT(ISBLANK({!vIRVer.Max_Incentive__c})), {!vIRVer.Max_Incentive__c} &gt; 0, {!fBaseIncentive} &gt; {!vIRVer.Max_Incentive__c}), {!vIRVer.Max_Incentive__c}, {!fBaseIncentive})</expression>
+        <expression>IF(AND({!vIRVer.Max_Incentive__c} &gt; 0, {!fBaseIncentive} &gt; {!vIRVer.Max_Incentive__c}), {!vIRVer.Max_Incentive__c}, {!fBaseIncentive})</expression>
         <scale>2</scale>
     </formulas>
     <formulas>
